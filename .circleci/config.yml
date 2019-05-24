@@ -27,7 +27,23 @@ jobs:
           root: /
           paths:
             - app
-
+  test:
+    working_directory: /
+    docker:
+    - image: docker:17.05.0-ce-git
+    steps:
+    - setup_remote_docker
+    - attach_workspace:
+        at: /
+    - run:
+        name: Copy CI files to root
+        command: |
+          cd /app
+          cp .circleci/data/Dockerfile .
+          cp .circleci/data/wait-for-mysql.sh .
+          cp .circleci/data/magento_module_install.sql .
+          cp .circleci/data/brazilian_states.sql .
+          cp .circleci/data/ciTestRunner.sh .
   publish:
     working_directory: /
     docker:
@@ -125,6 +141,9 @@ workflows:
   build_publish_deploy:
     jobs:
       - build
+      - test:
+          requires:
+          - build
       - publish:
           context: DockerRegistry
           requires:
