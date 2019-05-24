@@ -41,9 +41,7 @@ jobs:
           cd /app
           cp .circleci/data/Dockerfile .
           cp .circleci/data/wait-for-mysql.sh .
-          cp .circleci/data/magento_module_install.sql .
-          cp .circleci/data/brazilian_states.sql .
-          cp .circleci/data/ciTestRunner.sh .
+          cp .circleci/data/magento2_module_install.sql .
   publish:
     working_directory: /
     docker:
