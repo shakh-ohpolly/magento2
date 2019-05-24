@@ -120,9 +120,11 @@ jobs:
               echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list && \
               apt-get -y update && apt-get -y install google-chrome-unstable"
             docker exec -i newimage sh -c \
+                          "google-chrome-unstable --disable-gpu --no-sandbox --headless --no-sandbox --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222"
+            docker exec -i newimage sh -c \
               "cd /var/www/html && \
               git clone https://github.com/mundipagg/ecommerce-test-package.git && \
-              ls"
+              cd /var/www/html/ecommerce-test-package/ && vendor/bin/behat --profile magento2 --append-snippets"
       - run:
           name: Clear useless files
           command: |
