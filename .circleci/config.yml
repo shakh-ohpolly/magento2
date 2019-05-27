@@ -123,8 +123,7 @@ jobs:
                           "google-chrome-unstable --disable-gpu --no-sandbox --headless --no-sandbox --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222"
             docker exec -i newimage sh -c \
               "cd /var/www/html && \
-              git clone https://github.com/mundipagg/ecommerce-test-package.git && \
-              cd /var/www/html/ecommerce-test-package/ && vendor/bin/behat --profile magento2"
+              git clone https://github.com/mundipagg/ecommerce-test-package.git"
       - run:
           name: Clear useless files
           command: |
