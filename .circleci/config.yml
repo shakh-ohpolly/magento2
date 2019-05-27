@@ -121,6 +121,7 @@ jobs:
               apt-get -y update && apt-get -y install google-chrome-unstable"
             docker exec --detach newimage google-chrome-unstable --disable-gpu --no-sandbox --headless --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --disable-extensions &
             docker exec -i newimage sh -c "cd ~/ && git clone https://github.com/mundipagg/ecommerce-test-package.git"
+            docker exec -i newimage sh -c "cd ~/ecommerce-test-package && composer install"
             docker exec -i newimage sh -c "cd ~/ecommerce-test-package && vendor/bin/behat --profile magento2"
       - run:
           name: Clear useless files
