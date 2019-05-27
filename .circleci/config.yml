@@ -124,7 +124,7 @@ jobs:
             docker exec -i newimage sh -c \
               "cd /var/www/html && \
               git clone https://github.com/mundipagg/ecommerce-test-package.git && \
-              "
+              cd /var/www/html/ecommerce-test-package/ && vendor/bin/behat --profile magento2"
       - run:
           name: Clear useless files
           command: |
