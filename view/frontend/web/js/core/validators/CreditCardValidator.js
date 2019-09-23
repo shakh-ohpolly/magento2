@@ -3,8 +3,15 @@ var CreditCardValidator = function (formObject) {
 };
 
 CreditCardValidator.prototype.validate = function () {
+    var isSavedCard = false;
 
-    var isSavedCard = this.formObject.savedCreditCardSelect.val() !== 'new';
+    if (
+        typeof this.formObject.savedCreditCardSelect.val() != 'undefined' &&
+        this.formObject.savedCreditCardSelect.val() !== 'new' &&
+        this.formObject.savedCreditCardSelect.val().length > 0
+    ) {
+        isSavedCard = true;
+    }
 
     if (isSavedCard) {
         return this.validateSavedCard();

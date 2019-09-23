@@ -463,7 +463,6 @@ PaymentMethodController.prototype.fillFormText = function (formObject) {
     formHandler.init(formObject);
     formHandler.fillExpirationYearSelect(formText);
     formHandler.fillExpirationMonthSelect(formText);
-    //@Todo add other texts
 };
 
 PaymentMethodController.prototype.fillSavedCreditCardsSelect = function (formObject) {
@@ -507,4 +506,4 @@ PaymentMethodController.prototype.addShowMultibuyerListener = function(formObjec
         formHandler.init(formObject);
         formHandler.toggleMultibuyer(formObject);
     });
-}
+};
