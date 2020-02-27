@@ -235,8 +235,8 @@ PaymentMethodController.prototype.addCreditCardNumberListener = function(formObj
 PaymentMethodController.prototype.addCreditCardInstallmentsListener = function(formObject) {
 
     var paymentMethodController = this;
-
     formObject.creditCardInstallments.on('change', function() {
+        debugger;
         var value = jQuery(this).val();
         if (value != "" && value != 'undefined') {
             var interest = jQuery(this).find(':selected').attr("interest");
@@ -317,15 +317,30 @@ PaymentMethodController.prototype.updateTotal = function(interest, selectName) {
     total.tax_amount = parseFloat(interest);
     total.base_tax_amount = parseFloat(interest);
 
+    total.total_segments.push(
+        {
+            'code': 'discount',
+            'title': 'Desconto Parcela',
+            'value': 3
+        }
+    );
+
+    var discount = 6;
+
     for (var i = 0, len = total.total_segments.length; i < len; i++) {
         if (total.total_segments[i].code === "grand_total") {
-            total.total_segments[i].value = parseFloat(total.base_grand_total) + parseFloat(interest)
+            total.total_segments[i].value = parseFloat(total.base_grand_total) + parseFloat(interest) - parseFloat(discount)
             continue;
         }
         if (total.total_segments[i].code === "tax") {
             total.total_segments[i].value = interest;
         }
     }
+
+    total.base_discount_amount = -1;
+    total.coupon_code = 'AAA';
+
+       jQuery('.aqui').html('Desconto');
 
     paymentMethodController.platformConfig.updateTotals.setTotals(total);
 };

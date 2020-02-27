@@ -148,7 +148,6 @@ define(
                 if (typeof this.oldInstallmentTax == "undefined") {
                     this.oldInstallmentTax = 0;
                 }
-                
                 var total = quote.getTotals()();
                 var subTotalIndex = null;
                 for (var i = 0, len = total.total_segments.length; i < len; i++) {
